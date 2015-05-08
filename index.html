@@ -116,7 +116,8 @@
 				if (status == google.maps.GeocoderStatus.OK){
 					data += postNum + "," + postArrHash[postNum] + "," + result[0].geometry.location.lat() + "," + result[0].geometry.location.lng() + "\n";
 					judge += 1;
-					console.log(judge);
+//					console.log(judge);
+					document.getElementById('loading-view').innerHTML = count + "件中" + (judge + judge2) + "件処理しました。";
 				if(judge + judge2 === count){
 						loadingView(false);
 						alert("解析終了！");
