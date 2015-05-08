@@ -66,6 +66,7 @@
 		}
 		
 		function createData(postNum) {
+			console.log("Running!!");
 			var geocoder = new google.maps.Geocoder();
 			geocoder.geocode({
 				'address': postNum
@@ -75,7 +76,7 @@
 				}else{
 					if (status == "OVER_QUERY_LIMIT"){
 						setTimeout(function(){
-							markerMap(postNum);
+							createData(postNum);
 						}, 100);
 					}else{
 						console.log(status + " " + postNum);
