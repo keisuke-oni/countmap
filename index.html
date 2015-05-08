@@ -57,22 +57,40 @@
 					}
 				}
 				//次の処理はこここに書く
-				for (var key in postArrHash){
-					createData(key);
-				}
-				createObject();
+				createDataPre();
 			}
 			reader.readAsText(file, "utf-8");
 		}
 		
+		var judge = 0;
+		var judge2 = 0;
+		var count = 0;
+		
+		function createDataPre(){
+			for (var key in postArrHash){
+				count++;
+			}
+			setTimeout(function(){
+				for (var key in postArrHash) {
+					createData(key);
+//					console.log(count);
+				}
+			}, 1500);
+		}
+		
 		function createData(postNum) {
-			console.log("Running!!");
+//			console.log("Running!!");
 			var geocoder = new google.maps.Geocoder();
 			geocoder.geocode({
 				'address': postNum
 			}, function(result, status) {
 				if (status == google.maps.GeocoderStatus.OK){
 					data += postNum + "," + postArrHash[postNum] + "," + result[0].geometry.location.lat() + "," + result[0].geometry.location.lng() + "\n";
+					judge += 1;
+					console.log(judge);
+				if(judge + judge2 === count){
+						createObject();
+				}
 				}else{
 					if (status == "OVER_QUERY_LIMIT"){
 						setTimeout(function(){
@@ -80,6 +98,8 @@
 						}, 100);
 					}else{
 						console.log(status + " " + postNum);
+						judge2 += 1;
+						console.log(judge2);
 					}
 				}
 			});
@@ -110,6 +130,7 @@
 		}
 		
 		function createObject() {
+			console.log("createObjectRunning");
 			data = data.replace(/\r\n/g, "\n");
 			data = data.replace(/^(\n+)|(\n+)$/g, "");
 			infoArr = data.split(/\n/g);
