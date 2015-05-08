@@ -42,6 +42,7 @@
 		});
 		
 		function analData() {
+			alert("解析を開始しました");
 			var file = document.getElementById("filePicker").files[0];
 			var reader = new FileReader();
 			reader.onload = function (event) {
@@ -89,6 +90,7 @@
 					judge += 1;
 					console.log(judge);
 				if(judge + judge2 === count){
+						alert("解析終了！");
 						createObject();
 				}
 				}else{
