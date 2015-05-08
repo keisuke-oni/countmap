@@ -2,11 +2,32 @@
 <head>
 	<meta charset="utf-8">
 	<title>来場者集計マップv2 by 郵便番号</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="http://maps.google.com/maps/api/js?sensor=false&language=ja"></script>
 	<style type="text/css">
 		#map {
 			width: 100%;
 			height: 94%;
+		}
+		
+		#loading-view {
+ 			/* 領域の位置やサイズに関する設定 */
+ 			width: 100%;
+ 			height: 100%;
+ 			z-index: 9999;
+ 			position: fixed;
+ 			top: 0;
+ 			left: 0;
+ 			/* 背景関連の設定 */
+ 			background-color: #000000;
+ 			filter: alpha(opacity=85);
+ 			-moz-opacity: 0.85;
+ 			-khtml-opacity: 0.85;
+ 			opacity: 0.85;
+ 			background-image: url(./loading.gif);
+ 			background-position: center center;
+ 			background-repeat: no-repeat;
+ 			background-attachment: fixed;
 		}
 	</style>
 </head>
@@ -22,6 +43,12 @@
 	<div id="map"></div>
 	<div style="text-align: center;">Copyright(C) 2015 Keisuke Inoue (I13I006). All Rights Reserved.</div>
 	<script type="text/javascript">
+		function loadingView(flag) {
+			$('#loading-view').remove();
+			if(!flag) return;
+  			$('<div id="loading-view" />').appendTo('body');
+		}
+		
 		var data = "";
 		var postArrHash = new Object();
 		
@@ -43,6 +70,7 @@
 		
 		function analData() {
 			alert("解析を開始しました");
+			loadingView(true);
 			var file = document.getElementById("filePicker").files[0];
 			var reader = new FileReader();
 			reader.onload = function (event) {
@@ -90,6 +118,7 @@
 					judge += 1;
 					console.log(judge);
 				if(judge + judge2 === count){
+						loadingView(false);
 						alert("解析終了！");
 						createObject();
 				}
