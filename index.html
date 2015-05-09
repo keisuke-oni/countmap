@@ -71,8 +71,8 @@
 		});
 		
 		function analData() {
-			alert("解析を開始しました");
-			loadingView(true);
+//			alert("解析を開始しました");
+//			loadingView(true);
 			var file = document.getElementById("filePicker").files[0];
 			var reader = new FileReader();
 			reader.onload = function (event) {
@@ -88,6 +88,7 @@
 					}
 				}
 				//次の処理はこここに書く
+				loadingView(true);
 				createDataPre();
 			}
 			reader.readAsText(file, "utf-8");
