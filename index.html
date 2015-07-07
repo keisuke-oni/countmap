@@ -151,7 +151,7 @@
 			var blob = new Blob([data], {type: "text/csv"});
 			
 			if(window.navigator.msSaveBlob){
-				window.navigator.msSaveBlob(blob, "save_data.txt");
+				window.navigator.msSaveBlob(blob, "save_data.csv");
 			}else{
 				var a = document.createElement("a");
 				a.href = URL.createObjectURL(blob);
