@@ -1,3 +1,3 @@
 
-# 科学博物園来場者マップ
+# 科学博物園来場者集計マップ
 http://github.keisukeinoue.net/countmap
