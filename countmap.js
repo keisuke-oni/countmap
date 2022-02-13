@@ -11,17 +11,21 @@ var postPop = new Object(); //人数
 var postLat = new Object(); //緯度
 var postLng = new Object(); //経度
 
-var latlng = new google.maps.LatLng(34.69619, 133.926391);
-var options = {
-	zoom: 12,
-	center: latlng,
-	mapTypeId: google.maps.MapTypeId.ROADMAP
+var map;
+
+function initLocationMap(){
+	var latlng = new google.maps.LatLng(34.69619, 133.926391);
+	var options = {
+		zoom: 12,
+		center: latlng,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	}
+	map = new google.maps.Map(document.getElementById('map'), options);
+	var marker = new google.maps.Marker({
+		position: latlng,
+		map: map
+	});
 }
-var map = new google.maps.Map(document.getElementById('map'), options);
-var marker = new google.maps.Marker({
-	position: latlng,
-	map: map
-});
 
 function analData() {
 //			alert("解析を開始しました");
